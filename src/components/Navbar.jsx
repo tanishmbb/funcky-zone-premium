@@ -1,13 +1,17 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, Search, User } from 'lucide-react';
+import { ShoppingCart, Menu, Search, User, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
+    <>
     <nav className="navbar">
       <div className="navbar-container container">
         <div className="navbar-left">
-          <button className="menu-btn" aria-label="Menu">
+          <button className="menu-btn" aria-label="Menu" onClick={() => setIsMobileMenuOpen(true)}>
             <Menu size={24} />
           </button>
           <div className="nav-links">
@@ -36,8 +40,21 @@ const Navbar = () => {
             <span className="cart-count-mobile">0</span>
           </button>
         </div>
-      </div>
     </nav>
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+        <button className="close-menu-btn" onClick={() => setIsMobileMenuOpen(false)}>
+          <X size={28} />
+        </button>
+        <div className="mobile-nav-links">
+          <Link to="/shop" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>SHOP BY SEASON</Link>
+          <Link to="/shop?category=bottom" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>BOTTOM WEAR</Link>
+          <Link to="/shop?category=top" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>TOP WEAR</Link>
+          <Link to="/shop?category=accessories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>ACCESSORIES</Link>
+          <Link to="/login" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>LOGIN</Link>
+        </div>
+      </div>
+    </>
   );
 };
 
