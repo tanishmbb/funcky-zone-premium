@@ -39,7 +39,7 @@ const ProductDetails = () => {
         {/* Info Side */}
         <div className="product-info-panel">
           <h1 className="product-title-lg">FUNKY ESSENTIAL TEE VOL.{id}</h1>
-          <p className="product-price-lg">Rs. 1,499</p>
+          <p className="product-price-lg">₹ 1,499</p>
 
           <div className="product-description">
             <p>
@@ -85,7 +85,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="shipping-info">
-            <p>Free shipping on orders over Rs. 2,999.</p>
+            <p>Free shipping on orders over ₹ 2,999.</p>
             <p>Estimated delivery: 3-5 business days.</p>
           </div>
         </div>
