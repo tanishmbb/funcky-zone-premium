@@ -1,0 +1,125 @@
+.shop-page {
+  padding-bottom: 5rem;
+}
+
+.shop-header {
+  background-color: var(--color-light-gray);
+  margin-bottom: 3rem;
+  padding: 4rem 0;
+}
+
+.shop-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 0.5rem;
+}
+
+.shop-subtitle {
+  color: var(--color-gray);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.filter-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.chevron {
+  transition: transform var(--transition-fast);
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.product-count {
+  font-size: 0.9rem;
+  color: var(--color-gray);
+}
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .shop-layout {
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+  }
+  
+  .filter-toggle-btn {
+    display: none;
+  }
+  
+  .shop-sidebar {
+    display: block !important;
+  }
+}
+
+.shop-sidebar {
+  display: none;
+}
+
+.shop-sidebar.open {
+  display: block;
+}
+
+.filter-group {
+  margin-bottom: 2rem;
+}
+
+.filter-group h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-black);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.filter-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group a {
+  color: var(--color-gray);
+  font-size: 0.95rem;
+  transition: color var(--transition-fast);
+}
+
+.filter-group a:hover, .filter-group a.active {
+  color: var(--color-black);
+  font-weight: 600;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .shop-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
