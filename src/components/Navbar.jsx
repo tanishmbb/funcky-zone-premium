@@ -40,6 +40,7 @@ const Navbar = () => {
             <span className="cart-count-mobile">0</span>
           </button>
         </div>
+      </div>
     </nav>
       {/* Mobile Menu Overlay */}
       <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
