@@ -1,38 +1,64 @@
+/* ── Shop Page ── */
+
 .shop-page {
-  padding-bottom: 5rem;
+  padding-bottom: clamp(4rem, 8vw, 7rem);
 }
 
-.shop-header {
-  background-color: var(--color-light-gray);
-  margin-bottom: 3rem;
-  padding: 4rem 0;
+/* Banner */
+.shop-banner {
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 0;
+}
+
+.shop-banner-inner {
+  text-align: center;
 }
 
 .shop-title {
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  letter-spacing: -0.05em;
   margin-bottom: 0.5rem;
 }
 
 .shop-subtitle {
-  color: var(--color-gray);
-  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
 }
 
+/* Toolbar */
 .shop-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--color-light-gray);
+  padding: 1.25rem 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .filter-toggle-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.55rem 1rem;
+  border: 1.5px solid var(--color-black);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.filter-toggle-btn:hover {
+  background: var(--color-black);
+  color: var(--color-white);
 }
 
 .chevron {
@@ -44,31 +70,33 @@
 }
 
 .product-count {
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   color: var(--color-gray);
+  font-weight: 500;
 }
 
+/* Layout */
 .shop-layout {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  padding-top: 2rem;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .shop-layout {
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 220px 1fr;
     gap: 3rem;
   }
-  
   .filter-toggle-btn {
     display: none;
   }
-  
   .shop-sidebar {
     display: block !important;
   }
 }
 
+/* Sidebar */
 .shop-sidebar {
   display: none;
 }
@@ -78,48 +106,82 @@
 }
 
 .filter-group {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-.filter-group h3 {
-  font-size: 1.1rem;
+.filter-group-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gray);
   margin-bottom: 1rem;
-  border-bottom: 1px solid var(--color-black);
-  padding-bottom: 0.5rem;
-  display: inline-block;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .filter-group ul {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.15rem;
 }
 
 .filter-group a {
+  display: block;
   color: var(--color-gray);
-  font-size: 0.95rem;
-  transition: color var(--transition-fast);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.filter-group a:hover, .filter-group a.active {
+.filter-group a:hover {
   color: var(--color-black);
-  font-weight: 600;
+  background-color: var(--color-light-gray);
 }
 
+.filter-group a.active {
+  color: var(--color-black);
+  font-weight: 700;
+  background-color: var(--color-light-gray);
+}
+
+/* Shop Grid */
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
   .shop-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .shop-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+/* Empty state */
+.shop-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--color-gray);
+}
+
+.shop-empty h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-black);
 }

@@ -1,71 +1,94 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Minus, Plus, ShoppingBag } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { Minus, Plus, ShoppingBag, ChevronRight } from 'lucide-react';
 import './ProductDetails.css';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('M');
+  const [activeThumb, setActiveThumb] = useState(0);
 
-  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-
-  const handleDecrease = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
-  };
-
-  const handleIncrease = () => {
-    setQuantity(quantity + 1);
-  };
+  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
   return (
-    <div className="product-details-page fade-in container section">
+    <div className="product-details-page container fade-in">
+
+      {/* Breadcrumb */}
+      <nav className="product-breadcrumb" aria-label="Breadcrumb">
+        <Link to="/">Home</Link>
+        <ChevronRight size={13} />
+        <Link to="/shop">Shop</Link>
+        <ChevronRight size={13} />
+        <span>Funky Essential Tee Vol.{id}</span>
+      </nav>
+
       <div className="product-details-layout">
-        
-        {/* Images Side */}
+
+        {/* Gallery */}
         <div className="product-gallery">
-          <div className="main-image placeholder-img">
-            Main Image {id}
+          <div className="main-image">
+            <div className="main-image-inner" />
           </div>
           <div className="thumbnail-grid">
-            {[1, 2, 3, 4].map(thumb => (
-              <div key={thumb} className="thumbnail placeholder-img">
-                Thumb
+            {[0, 1, 2, 3].map((thumb) => (
+              <div
+                key={thumb}
+                className={`thumbnail${activeThumb === thumb ? ' active-thumb' : ''}`}
+                onClick={() => setActiveThumb(thumb)}
+              >
+                <div className="thumbnail-inner" />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Info Side */}
+        {/* Info Panel */}
         <div className="product-info-panel">
-          <h1 className="product-title-lg">FUNKY ESSENTIAL TEE VOL.{id}</h1>
-          <p className="product-price-lg">₹ 1,499</p>
+          <div className="product-tag-row">
+            <span className="product-tag new">New Arrival</span>
+            <span className="product-tag">Tees</span>
+          </div>
+
+          <h1 className="product-title-lg">Funky Essential Tee Vol.{id}</h1>
+
+          <div className="product-price-row">
+            <span className="product-price-lg">₹ 1,499</span>
+            <span className="product-price-original">₹ 1,999</span>
+            <span className="product-price-badge">25% OFF</span>
+          </div>
+
+          <div className="divider-line" />
 
           <div className="product-description">
             <p>
-              Premium heavyweight cotton tee with an oversized fit. 
-              Featuring our signature puff print logo on the back and 
+              Premium heavyweight cotton tee with an oversized fit.
+              Featuring our signature puff print logo on the back and
               minimal branding on the front. Built for everyday wear.
             </p>
             <ul>
               <li>100% Premium Cotton</li>
               <li>240 GSM Heavyweight</li>
               <li>Oversized Boxy Fit</li>
-              <li>Pre-shrunk</li>
+              <li>Pre-shrunk &amp; Colourfast</li>
             </ul>
           </div>
 
+          <div className="divider-line" />
+
+          {/* Size Selector */}
           <div className="size-selector">
             <div className="size-header">
-              <span>Size</span>
+              <span className="size-label">Size — {selectedSize}</span>
               <button className="size-guide-btn">Size Guide</button>
             </div>
             <div className="size-options">
-              {sizes.map(size => (
-                <button 
+              {sizes.map((size) => (
+                <button
                   key={size}
-                  className={`size-btn ${selectedSize === size ? 'active' : ''}`}
+                  className={`size-btn${selectedSize === size ? ' active' : ''}`}
                   onClick={() => setSelectedSize(size)}
+                  aria-pressed={selectedSize === size}
                 >
                   {size}
                 </button>
@@ -73,20 +96,26 @@ const ProductDetails = () => {
             </div>
           </div>
 
+          {/* Add to Cart */}
           <div className="add-to-cart-section">
-            <div className="quantity-selector">
-              <button onClick={handleDecrease}><Minus size={16} /></button>
+            <div className="quantity-selector" aria-label="Quantity">
+              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} aria-label="Decrease">
+                <Minus size={15} />
+              </button>
               <span>{quantity}</span>
-              <button onClick={handleIncrease}><Plus size={16} /></button>
+              <button onClick={() => setQuantity((q) => q + 1)} aria-label="Increase">
+                <Plus size={15} />
+              </button>
             </div>
-            <button className="btn-primary add-to-cart-btn">
-              <ShoppingBag size={20} /> ADD TO CART
+            <button className="add-to-cart-btn" aria-label="Add to cart">
+              <ShoppingBag size={18} /> Add to Cart
             </button>
           </div>
 
+          {/* Shipping */}
           <div className="shipping-info">
-            <p>Free shipping on orders over ₹ 2,999.</p>
-            <p>Estimated delivery: 3-5 business days.</p>
+            <p>Free shipping on orders over ₹ 2,999</p>
+            <p>Estimated delivery: 3–5 business days</p>
           </div>
         </div>
 
